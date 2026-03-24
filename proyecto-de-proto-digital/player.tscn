@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://6t4ji023hiy0" path="res://playerGrey_walk2.png" id="5_dw050"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7ghd"]
-radius = 26.999998
-height = 61.842087
+radius = 9.803932
+height = 34.868412
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nvl01"]
 animations = [{
@@ -39,11 +39,14 @@ animations = [{
 script = ExtResource("1_sweqy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=247107833]
-position = Vector2(223.49998, 316)
+position = Vector2(0, 0.5)
 scale = Vector2(2.0399978, 1.5200005)
 shape = SubResource("CapsuleShape2D_n7ghd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=521724549]
-position = Vector2(223.5, 316)
+position = Vector2(0, 0.5)
+scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_nvl01")
 animation = &"up"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

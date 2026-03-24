@@ -45,17 +45,23 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eqsov"]
+radius = 4.476986
+height = 12.839691
 
 [node name="Mob" type="RigidBody2D" unique_id=1958113731]
+gravity_scale = 0.0
 script = ExtResource("1_1qmh0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1895044724]
+scale = Vector2(0.4040897, 0.40987077)
 sprite_frames = SubResource("SpriteFrames_yscv0")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1492297271]
 rotation = 1.5449935
-scale = Vector2(4.6890945, 4.3640428)
+scale = Vector2(4.736368, 4.4394608)
 shape = SubResource("CapsuleShape2D_eqsov")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1103590520]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1745010983]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

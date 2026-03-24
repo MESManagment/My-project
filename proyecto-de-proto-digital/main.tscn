@@ -11,15 +11,18 @@ _data = {
 point_count = 18
 
 [node name="Main" type="Node2D" unique_id=510361006]
+position = Vector2(1, 0)
 script = ExtResource("1_0xm2m")
 mob_scene = ExtResource("2_1bvp3")
 
 [node name="Player" parent="." unique_id=532947619 instance=ExtResource("2_h2yge")]
+position = Vector2(48, 84)
 
 [node name="MobTimer" type="Timer" parent="." unique_id=1291384343]
-wait_time = 0.5
 
 [node name="ScoreTimer" type="Timer" parent="." unique_id=1135684996]
+
+[node name="StartTimer" type="Timer" parent="." unique_id=2024349548]
 
 [node name="StartPosition" type="Marker2D" parent="." unique_id=1667008128]
 position = Vector2(240, 450)
@@ -30,3 +33,8 @@ curve = SubResource("Curve2D_1bvp3")
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" unique_id=155435253]
 position = Vector2(75, 46)
 rotation = -0.049410302
+
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
