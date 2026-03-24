@@ -1,13 +1,18 @@
 extends Area2D
 
-@export var speed = 400 # Velocidad del jugador (píxeles/segundo)
-var screen_size # Tamaño de la ventana de juego
+# 1. AÑADE ESTA LÍNEA AQUÍ ARRIBA
+signal hit
+
+@export var speed = 400 
+var screen_size 
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	# 2. AÑADE ESTO PARA QUE EL JUGADOR ESTÉ OCULTO AL EMPEZAR
+	hide()
 
 func _process(delta):
-	var velocity = Vector2.ZERO # El vector de movimiento del jugador.
+	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("ui_left"):
@@ -19,14 +24,14 @@ func _process(delta):
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite2D.play() # Reproduce la animación
+		$AnimatedSprite2D.play() 
 	else:
-		$AnimatedSprite2D.stop() # Se detiene si no te mueves
+		$AnimatedSprite2D.stop() 
 
-	# Actualizamos la posición y evitamos que salga de la pantalla
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
+	
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk"
 		$AnimatedSprite2D.flip_v = false
@@ -34,3 +39,16 @@ func _process(delta):
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
+
+# 3. AÑADE ESTA FUNCIÓN PARA CUANDO ALGO TOCA AL JUGADOR
+func _on_body_entered(_body):
+	hide() # El jugador desaparece
+	hit.emit() # Emitimos la señal "hit"
+	# Desactivamos la colisión para no morir mil veces seguidas
+	$CollisionShape2D.set_deferred("disabled", true)
+
+# 4. AÑADE ESTA FUNCIÓN PARA REINICIAR AL JUGADOR
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
