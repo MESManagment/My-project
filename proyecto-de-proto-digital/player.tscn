@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://0wo5x2kcth5b"]
 
 [ext_resource type="Script" uid="uid://dk2hoefrepvb8" path="res://player.gd" id="1_sweqy"]
-[ext_resource type="Texture2D" uid="uid://b5l6cnaobccla" path="res://enemyFlyingAlt_1.png" id="2_2hs0m"]
-[ext_resource type="Texture2D" uid="uid://drjefae2sttok" path="res://enemyFlyingAlt_2.png" id="3_1jxqw"]
-[ext_resource type="Texture2D" uid="uid://2s74o0lvs2rh" path="res://enemyWalking_2.png" id="4_dw050"]
-[ext_resource type="Texture2D" uid="uid://ptulhg283ly5" path="res://enemyWalking_1.png" id="5_b26j0"]
+[ext_resource type="Texture2D" uid="uid://borl66oebkpmy" path="res://playerGrey_up1.png" id="2_sweqy"]
+[ext_resource type="Texture2D" uid="uid://rsgva7rdc2bw" path="res://playerGrey_up2.png" id="3_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://dw3ng33ilj0rc" path="res://playerGrey_walk1.png" id="4_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://6t4ji023hiy0" path="res://playerGrey_walk2.png" id="5_dw050"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7ghd"]
 radius = 26.999998
@@ -14,24 +14,24 @@ height = 61.842087
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2hs0m")
+"texture": ExtResource("2_sweqy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_1jxqw")
+"texture": ExtResource("3_2hs0m")
 }],
 "loop": true,
-"name": &"Up",
+"name": &"up",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_dw050")
+"texture": ExtResource("4_1jxqw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_b26j0")
+"texture": ExtResource("5_dw050")
 }],
 "loop": true,
-"name": &"Walk",
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -39,9 +39,11 @@ animations = [{
 script = ExtResource("1_sweqy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=247107833]
+position = Vector2(223.49998, 316)
 scale = Vector2(2.0399978, 1.5200005)
 shape = SubResource("CapsuleShape2D_n7ghd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=521724549]
+position = Vector2(223.5, 316)
 sprite_frames = SubResource("SpriteFrames_nvl01")
-animation = &"Up"
+animation = &"up"
