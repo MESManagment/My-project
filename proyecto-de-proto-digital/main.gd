@@ -4,14 +4,16 @@ extends Node
 var score
 
 func _ready():
-	# Borramos el new_game() de aquí para que el botón del HUD sea el que mande
+	# No llamamos a new_game() aquí para que el botón Start del HUD tenga el control
 	pass
 
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	# Mostramos el mensaje de Game Over en el HUD
 	$HUD.show_game_over()
+	# DETENEMOS la música de fondo y REPRODUCIMOS el sonido de muerte
+	$Music.stop()
+	$DeathSound.play()
 	# Limpiamos la pantalla de enemigos
 	get_tree().call_group("mobs", "queue_free")
 
@@ -19,13 +21,13 @@ func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
-	# Actualizamos el HUD al empezar
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	# REPRODUCIMOS la música de fondo al empezar
+	$Music.play()
 
 func _on_score_timer_timeout():
 	score += 1
-	# Actualizamos el puntaje cada segundo
 	$HUD.update_score(score)
 
 func _on_start_timer_timeout():
